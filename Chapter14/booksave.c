@@ -34,29 +34,42 @@ int main()
   int theNumberOfBooks;
 
   
-  if(NULL == (pbooks = fopen("books.dat", "a + b")))
+
+struct book inputbooks[2]={
+   {"gone with wind",
+    "whatever",
+    12.87
+   },
+   {
+     "西游记",
+     "吴承恩",
+     13.56
+   }
+ };
+
+struct book showbooks[2];
+  
+
+/**********************/
+if(NULL == (pbooks = fopen("books.dat", "a + b")))
   {
       fputs("open the file books.dat failed.\n", stderr);
       exit(0);
   }
 
-  struct book books[1]={
-   {"gone with wind",
-    "whatever",
-    12.87
-   }
- };
 
  rewind(pbooks);
-
-
- writeTheBookInfoIntoTheFile(&books[0], 1, pbooks);
-
- struct book * books2 = (struct book *)malloc(sizeof(struct book));
+ writeTheBookInfoIntoTheFile(inputbooks, 2, pbooks);
  rewind(pbooks);
- readTheBookInfoFromTheFile(books2, 1, pbooks);  
- printf("name = %s author = %s and the value = %f\n", books2 -> title, books2 -> author, books2 -> price);
- free(books2);
+ readTheBookInfoFromTheFile(showbooks, 2, pbooks);  
+ 
+ int i;
+ for( i = 0; i < 2; i++)
+ {
+  printf("name = %s author = %s and the value = %f\n", showbooks[i].title, showbooks[i].author, showbooks[i] .price);
+ }
+ 
+
  
   return 0;
 }
@@ -65,7 +78,7 @@ void writeTheBookInfoIntoTheFile(struct book * ptr, int theNumberOfBooks, FILE *
 {
   int counter = 0; 
   int size = sizeof(struct book);
-  while(counter < theNumberOfBooks && 1 == fwrite(ptr, size, 1, pbooks))
+  while(counter < theNumberOfBooks && 1 == fwrite(&ptr[counter], size, 1, pbooks))
   { 
     counter++;
   }
@@ -76,7 +89,7 @@ void readTheBookInfoFromTheFile(struct book * ptr, int theNumberOfBooks, FILE * 
 {
     int counter = 0;
     int size = sizeof(struct book);
-    while(counter < theNumberOfBooks && 1 == fread(ptr, size, 1, pbooks))
+    while(counter < theNumberOfBooks && 1 == fread(&ptr[counter], size, 1, pbooks))
     {
       counter++;
     }
