@@ -3,7 +3,6 @@
 
 int main()
 {
-  
   int max;
   int i = 0;
   double * ptd;
