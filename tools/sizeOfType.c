@@ -10,8 +10,9 @@
 
 int main(void)
 {
-  printf("int          occupied %d bits in this centos.\n", sizeof(int) * CHAR_BIT);
-  printf("unsigned int occupied %d bits in this centos.\n", sizeof(int) * CHAR_BIT);
-  
+  printf("int            occupied %d bits in this centos.\n", sizeof(int) * CHAR_BIT);
+  printf("unsigned int   occupied %d bits in this centos.\n", sizeof(int) * CHAR_BIT);
+  printf("short          occupied %d bits in this centos.\n", sizeof(short) * CHAR_BIT);
+  printf("unsigned short occupied %d bits in this centos.\n", sizeof(unsigned short) * CHAR_BIT);
   return 0;
 }
